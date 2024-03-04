@@ -3,6 +3,8 @@ import pyttsx3
 import pymysql
 import base64
 import os
+import pygame
+import time
 
 connection = pymysql.connect(
     host="sql6.freesqldatabase.com",
@@ -11,6 +13,12 @@ connection = pymysql.connect(
     database="sql6688113"
 )
 
+def speak(text):
+    pygame.init()
+    pygame.mixer.init()
+    sounda = pygame.mixer.Sound(text)
+    sounda.play()
+    time.sleep(1.5)
 
 def css():
     st.markdown("""
@@ -119,7 +127,7 @@ def show_content():
             if pred < 95:
                 st.warning( "Tumor is detected.")
                 #pyttsx3.speak( "Tumor is detected.")
-                os.startfile("btd/Yes.mp3")
+                speak("btd/Yes.mp3")
                 # Plot and save preprocessed image
                 plt.imshow(img_preprocessed[0])
                 plt.title("Preprocessed Image")
@@ -134,7 +142,7 @@ def show_content():
             else:
                 st.success("No Tumor is detected.")
                 #pyttsx3.speak("No  Tumor is detected.")
-                playsound("btd/No.mp3")
+                speak("btd/No.mp3")
                 u, p = st.columns([2, 2])
                 with u:
                     st.write("#")
