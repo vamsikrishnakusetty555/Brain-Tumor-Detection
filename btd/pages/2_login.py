@@ -11,25 +11,6 @@ connection = pymysql.connect(
     database="sql6688113"
 )
 
-def speak(file_path: str):
-    with open(file_path, "rb") as f:
-        data = f.read()
-        b64 = base64.b64encode(data).decode()
-        audio_id = "audio_element"
-        audio_html = f"""
-            <audio id="{audio_id}" controls autoplay="true">
-            <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
-            </audio>
-            <script>
-                var audio = document.getElementById("{audio_id}");
-                audio.load(); // Force reload of the audio element
-                audio.play(); // Auto-play the audio
-            </script>
-            """
-        st.markdown(audio_html, unsafe_allow_html=True)
-
-
-
 def css():
     st.markdown("""
     <style>
@@ -136,7 +117,18 @@ def show_content():
 
             if pred < 95:
                 st.warning( "Tumor is detected.")
-                speak("btd/Yes.mp3")
+                with open("btd/Yes.mp3", "rb") as f:
+                    data = f.read()
+                    b64 = base64.b64encode(data).decode()
+                    md = f"""
+                        <audio controls autoplay="true">
+                        <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+                        </audio>
+                        """
+                    st.markdown(
+                        md,
+                        unsafe_allow_html=True,
+                    )
                 # Plot and save preprocessed image
                 plt.imshow(img_preprocessed[0])
                 plt.title("Preprocessed Image")
@@ -150,7 +142,18 @@ def show_content():
                     st.image(os.path.join("temp", "preprocessed_image.jpg"), caption="Preprocessed Image")
             else:
                 st.success("No Tumor is detected.")
-                speak("btd/No.mp3")
+                with open("btd/No.mp3", "rb") as f:
+                    data = f.read()
+                    b64 = base64.b64encode(data).decode()
+                    md = f"""
+                        <audio controls autoplay="true">
+                        <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+                        </audio>
+                        """
+                    st.markdown(
+                        md,
+                        unsafe_allow_html=True,
+                    )
                 u, p = st.columns([2, 2])
                 with u:
                     st.write("#")
