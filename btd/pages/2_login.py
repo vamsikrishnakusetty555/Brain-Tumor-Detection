@@ -1,5 +1,6 @@
 import streamlit as st
 import pyttsx3
+import winsound
 import pymysql
 import base64
 from gtts import gTTS
@@ -11,11 +12,11 @@ connection = pymysql.connect(
     password="TiC6y7fHhE",
     database="sql6688113"
 )
-def speak(text):
-    engine = pyttsx3.init()
-    engine.say(text)
-    engine.runAndWait()
-
+def play_audio(file_path):
+    try:
+        winsound.PlaySound(file_path, winsound.SND_FILENAME)
+    except Exception as e:
+        print("Error:", e)
 
 def css():
     st.markdown("""
