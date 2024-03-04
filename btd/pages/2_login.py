@@ -15,12 +15,15 @@ def speak(file_path: str):
    with open(file_path, "rb") as f:
         data = f.read()
         b64 = base64.b64encode(data).decode()
-        audio_html = f"""
-            <audio controls autoplay="true" style="opacity: 0.5;">
+        md = f"""
+            <audio controls autoplay="true" style="opacity:0.5">
             <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
             </audio>
             """
-        st.markdown(audio_html, unsafe_allow_html=True)
+        st.markdown(
+            md,
+            unsafe_allow_html=True,
+        )
 
 
 def css():
