@@ -2,9 +2,7 @@ import streamlit as st
 import pymysql
 import base64
 import os
-from pydub import AudioSegment
-from io import BytesIO
-from IPython.display import Audio
+
 
 connection = pymysql.connect(
     host="sql6.freesqldatabase.com",
@@ -13,9 +11,9 @@ connection = pymysql.connect(
     database="sql6688113"
 )
 def speak(audio_file_path):
-    audio_data = open(audio_file_path, 'rb').read()
-    audio = Audio(audio_data)
-    st.write(audio)
+    audio_file = open(audio_file_path, "rb")
+    audio_bytes = audio_file.read()
+    st.audio(audio_bytes, format="audio/mp3")
     
 def css():
     st.markdown("""
