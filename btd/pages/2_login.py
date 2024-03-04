@@ -10,10 +10,7 @@ connection = pymysql.connect(
     password="TiC6y7fHhE",
     database="sql6688113"
 )
-def speak(audio_file_path):
-    audio_file = open('btd/Yes.mp3', 'rb').read()
-    audio_bytes = base64.b64encode(audio_file).decode('utf-8')
-    st.markdown(f'<audio autoplay controls><source src="data:audio/mp3;base64,{audio_bytes}" type="audio/mp3"></audio>', unsafe_allow_html=True)
+
 def css():
     st.markdown("""
     <style>
@@ -122,7 +119,6 @@ def show_content():
 
             if pred < 95:
                 st.warning( "Tumor is detected.")
-                speak("btd/Yes.mp3")
                 plt.imshow(img_preprocessed[0])
                 plt.title("Preprocessed Image")
                 plt.savefig(os.path.join("temp", "preprocessed_image.jpg"))
@@ -135,7 +131,6 @@ def show_content():
                     st.image(os.path.join("temp", "preprocessed_image.jpg"), caption="Preprocessed Image")
             else:
                 st.success("No Tumor is detected.")
-                speak("btd/No.mp3")    
                 u, p = st.columns([2, 2])
                 with u:
                     st.write("#")
