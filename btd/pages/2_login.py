@@ -11,9 +11,9 @@ connection = pymysql.connect(
     database="sql6688113"
 )
 def speak(audio_file_path):
-    audio_file = open(audio_file_path, "rb")
-    audio_bytes = audio_file.read()
-    st.audio(audio_bytes, format="audio/mp3", start_time=0, autoplay=True)
+    audio_file = open('btd/Yes.mp3', 'rb').read()
+    audio_bytes = base64.b64encode(audio_file).decode('utf-8')
+    st.markdown(f'<audio autoplay controls><source src="data:audio/mp3;base64,{audio_bytes}" type="audio/mp3"></audio>', unsafe_allow_html=True)
     
 def css():
     st.markdown("""
