@@ -16,6 +16,10 @@ connection = pymysql.connect(
 def speak(text):
     pygame.init()
     pygame.mixer.init()
+
+    # Explicitly specify the audio driver
+    pygame.mixer.init(driver='alsa')
+
     sounda = pygame.mixer.Sound(text)
     sounda.play()
     time.sleep(1.5)
