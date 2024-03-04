@@ -3,8 +3,7 @@ import pyttsx3
 import pymysql
 import base64
 import os
-import pygame
-import time
+
 
 connection = pymysql.connect(
     host="sql6.freesqldatabase.com",
@@ -13,16 +12,6 @@ connection = pymysql.connect(
     database="sql6688113"
 )
 
-def speak(text):
-    pygame.init()
-    pygame.mixer.init()
-
-    # Explicitly specify the audio driver
-    pygame.mixer.init(driver='alsa')
-
-    sounda = pygame.mixer.Sound(text)
-    sounda.play()
-    time.sleep(1.5)
 
 def css():
     st.markdown("""
