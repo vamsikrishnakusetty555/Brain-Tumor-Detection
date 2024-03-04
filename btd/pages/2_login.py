@@ -16,7 +16,7 @@ def speak(file_path: str):
         data = f.read()
         b64 = base64.b64encode(data).decode()
         md = f"""
-            <audio controls autoplay="true">
+            <audio controls autoplay="true" style="display:none">
             <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
             </audio>
             """
