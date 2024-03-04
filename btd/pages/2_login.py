@@ -131,7 +131,7 @@ def show_content():
             if pred < 95:
                 st.warning( "Tumor is detected.")
                 #pyttsx3.speak( "Tumor is detected.")
-                speak("btd/Yes.mp3")
+                #speak("btd/Yes.mp3")
                 # Plot and save preprocessed image
                 plt.imshow(img_preprocessed[0])
                 plt.title("Preprocessed Image")
@@ -146,7 +146,7 @@ def show_content():
             else:
                 st.success("No Tumor is detected.")
                 #pyttsx3.speak("No  Tumor is detected.")
-                speak("btd/No.mp3")
+                #speak("btd/No.mp3")
                 u, p = st.columns([2, 2])
                 with u:
                     st.write("#")
