@@ -1,7 +1,9 @@
 import streamlit as st
-import pyttsx3
+#import pyttsx3
 import pymysql
 import base64
+from gtts import gTTS
+import os
 
 connection = pymysql.connect(
     host="sql6.freesqldatabase.com",
@@ -9,6 +11,10 @@ connection = pymysql.connect(
     password="TiC6y7fHhE",
     database="sql6688113"
 )
+def speak(text):
+    tts = gTTS(text=text, lang='en')
+    tts.save("output.mp3")
+    os.system("mpg321 output.mp3")
 
 
 def css():
@@ -117,7 +123,8 @@ def show_content():
 
             if pred < 95:
                 st.warning( "Tumor is detected.")
-                pyttsx3.speak( "Tumor is detected.")
+                #pyttsx3.speak( "Tumor is detected.")
+                speak("Tumor is detected.")
                 # Plot and save preprocessed image
                 plt.imshow(img_preprocessed[0])
                 plt.title("Preprocessed Image")
@@ -131,7 +138,8 @@ def show_content():
                     st.image(os.path.join("temp", "preprocessed_image.jpg"), caption="Preprocessed Image")
             else:
                 st.success("No Tumor is detected.")
-                pyttsx3.speak("No  Tumor is detected.")
+                #pyttsx3.speak("No  Tumor is detected.")
+                speak("No Tumor is detected.")
                 u, p = st.columns([2, 2])
                 with u:
                     st.write("#")
