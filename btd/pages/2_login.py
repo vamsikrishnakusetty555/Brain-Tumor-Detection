@@ -1,10 +1,11 @@
 import streamlit as st
 import pyttsx3
-import winsound
 import pymysql
 import base64
 from gtts import gTTS
 import os
+import wave
+import pyaudio
 
 connection = pymysql.connect(
     host="sql6.freesqldatabase.com",
@@ -12,9 +13,23 @@ connection = pymysql.connect(
     password="TiC6y7fHhE",
     database="sql6688113"
 )
+
 def play_audio(file_path):
+    chunk = 1024
     try:
-        winsound.PlaySound(file_path, winsound.SND_FILENAME)
+        wf = wave.open(file_path, 'rb')
+        p = pyaudio.PyAudio()
+        stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+                        channels=wf.getnchannels(),
+                        rate=wf.getframerate(),
+                        output=True)
+        data = wf.readframes(chunk)
+        while data:
+            stream.write(data)
+            data = wf.readframes(chunk)
+        stream.stop_stream()
+        stream.close()
+        p.terminate()
     except Exception as e:
         print("Error:", e)
 
@@ -125,7 +140,7 @@ def show_content():
             if pred < 95:
                 st.warning( "Tumor is detected.")
                 #pyttsx3.speak( "Tumor is detected.")
-                playsound("btd/Yes.wav")
+                play_audio("btd/Yes.wav")
                 # Plot and save preprocessed image
                 plt.imshow(img_preprocessed[0])
                 plt.title("Preprocessed Image")
@@ -140,7 +155,7 @@ def show_content():
             else:
                 st.success("No Tumor is detected.")
                 #pyttsx3.speak("No  Tumor is detected.")
-                playsound("btd/No.wav")
+                play_audio("btd/No.wav")
                 u, p = st.columns([2, 2])
                 with u:
                     st.write("#")
