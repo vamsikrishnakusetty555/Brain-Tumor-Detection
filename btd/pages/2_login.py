@@ -12,7 +12,7 @@ connection = pymysql.connect(
 )
 
 def speak(file_path: str):
-   with open(file_path, "rb") as f:
+    with open(file_path, "rb") as f:
         data = f.read()
         b64 = base64.b64encode(data).decode()
         md = f"""
@@ -24,6 +24,7 @@ def speak(file_path: str):
             md,
             unsafe_allow_html=True,
         )
+
 
 
 def css():
