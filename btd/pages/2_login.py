@@ -3,7 +3,7 @@ import pyttsx3
 import pymysql
 import base64
 import os
-import playsound
+from playsound import playsound
 
 connection = pymysql.connect(
     host="sql6.freesqldatabase.com",
