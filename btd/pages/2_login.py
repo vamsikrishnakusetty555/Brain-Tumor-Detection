@@ -16,14 +16,15 @@ def speak(file_path: str):
         data = f.read()
         b64 = base64.b64encode(data).decode()
         md = f"""
-            <audio controls autoplay="true" style="display:none">
+            <audio id="audio" controls style="display:none">
             <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
             </audio>
+            <script>
+                var audio = document.getElementById("audio");
+                audio.play();
+            </script>
             """
-        st.markdown(
-            md,
-            unsafe_allow_html=True,
-        )
+        st.markdown(md, unsafe_allow_html=True)
 
 
 def css():
