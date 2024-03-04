@@ -2,7 +2,9 @@ import streamlit as st
 import pymysql
 import base64
 import os
-
+from pydub import AudioSegment
+from io import BytesIO
+from IPython.display import Audio
 
 connection = pymysql.connect(
     host="sql6.freesqldatabase.com",
@@ -10,7 +12,11 @@ connection = pymysql.connect(
     password="TiC6y7fHhE",
     database="sql6688113"
 )
-
+def speak(audio_file_path):
+    audio_data = open(audio_file_path, 'rb').read()
+    audio = Audio(audio_data)
+    st.write(audio)
+    
 def css():
     st.markdown("""
     <style>
@@ -119,8 +125,7 @@ def show_content():
 
             if pred < 95:
                 st.warning( "Tumor is detected.")
-                audio_html = f'<audio src="btd/Yes.mp3" controls></audio>'
-                st.markdown(audio_html, unsafe_allow_html=True)               
+                speak("btd/Yes.mp3")
                 plt.imshow(img_preprocessed[0])
                 plt.title("Preprocessed Image")
                 plt.savefig(os.path.join("temp", "preprocessed_image.jpg"))
@@ -133,9 +138,7 @@ def show_content():
                     st.image(os.path.join("temp", "preprocessed_image.jpg"), caption="Preprocessed Image")
             else:
                 st.success("No Tumor is detected.")
-                audio_file_path = 'btd/No.mp3'
-                audio_html = f'<audio src="{audio_file_path}" controls></audio>'
-                st.markdown(audio_html, unsafe_allow_html=True)    
+                speak("btd/No.mp3")    
                 u, p = st.columns([2, 2])
                 with u:
                     st.write("#")
