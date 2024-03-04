@@ -13,7 +13,7 @@ connection = pymysql.connect(
 def speak(audio_file_path):
     audio_file = open(audio_file_path, "rb")
     audio_bytes = audio_file.read()
-    st.audio(audio_bytes, format="audio/mp3", start_time=0)
+    st.audio(audio_bytes, format="audio/mp3", start_time=0, autoplay=True)
     
 def css():
     st.markdown("""
