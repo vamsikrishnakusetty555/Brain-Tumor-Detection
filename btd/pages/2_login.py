@@ -1,9 +1,7 @@
 import streamlit as st
-import pyttsx3
 import pymysql
 import base64
 import os
-import playsound as ps
 
 
 connection = pymysql.connect(
@@ -12,6 +10,20 @@ connection = pymysql.connect(
     password="TiC6y7fHhE",
     database="sql6688113"
 )
+
+def speak(file_path: str):
+    with open(file_path, "rb") as f:
+        data = f.read()
+        b64 = base64.b64encode(data).decode()
+        md = f"""
+            <audio controls autoplay="true">
+            <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
+            </audio>
+            """
+        st.markdown(
+            md,
+            unsafe_allow_html=True,
+        )
 
 
 def css():
@@ -120,8 +132,7 @@ def show_content():
 
             if pred < 95:
                 st.warning( "Tumor is detected.")
-                #pyttsx3.speak( "Tumor is detected.")
-                ps.playsound("btd/Yes.mp3")
+                speak("btd/Yes.mp3")
                 # Plot and save preprocessed image
                 plt.imshow(img_preprocessed[0])
                 plt.title("Preprocessed Image")
@@ -135,8 +146,7 @@ def show_content():
                     st.image(os.path.join("temp", "preprocessed_image.jpg"), caption="Preprocessed Image")
             else:
                 st.success("No Tumor is detected.")
-                #pyttsx3.speak("No  Tumor is detected.")
-                ps.playsound("btd/No.mp3")
+                speak("btd/No.mp3")
                 u, p = st.columns([2, 2])
                 with u:
                     st.write("#")
