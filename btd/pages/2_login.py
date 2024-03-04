@@ -20,6 +20,11 @@ def css():
     </style>
     """, unsafe_allow_html=True)
 
+def get_base64_encoded_audio(filepath):
+    with open(filepath, "rb") as audio_file:
+        encoded_audio = base64.b64encode(audio_file.read()).decode("utf-8")
+    return f"data:audio/mp3;base64,{encoded_audio}"
+    
 def expanders():
     q = """◼ How long a brain tumor patient can live?/◼ What is the last stage of brain tumor?/◼ Can brain tumor be cured?/◼ Are brain tumors genetic?
     /◼ Do you sleep a lot with a brain tumor?/◼ Does brain tumor cause hair loss?/◼ Can a brain tumor develop in 6 months?/◼ What is the physical test for brain tumor?
@@ -117,7 +122,7 @@ def show_content():
 
             if pred < 95:
                 st.warning( "Tumor is detected.")
-                st.audio("btd/Yes.mp3", format="audio/mp3", start_time=0)
+                st.audio(get_base64_encoded_audio("btd/Yes.mp3"), format="audio/mp3", start_time=0)
                 # Plot and save preprocessed image
                 plt.imshow(img_preprocessed[0])
                 plt.title("Preprocessed Image")
@@ -131,7 +136,7 @@ def show_content():
                     st.image(os.path.join("temp", "preprocessed_image.jpg"), caption="Preprocessed Image")
             else:
                 st.success("No Tumor is detected.")
-                st.audio("btd/No.mp3", format="audio/mp3", start_time=0)
+                st.audio(get_base64_encoded_audio("btd/No.mp3"), format="audio/mp3", start_time=0)
                 u, p = st.columns([2, 2])
                 with u:
                     st.write("#")
