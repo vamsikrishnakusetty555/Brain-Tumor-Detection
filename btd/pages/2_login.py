@@ -3,7 +3,6 @@ import pyttsx3
 import pymysql
 import base64
 import os
-from playsound import playsound
 
 connection = pymysql.connect(
     host="sql6.freesqldatabase.com",
@@ -120,7 +119,7 @@ def show_content():
             if pred < 95:
                 st.warning( "Tumor is detected.")
                 #pyttsx3.speak( "Tumor is detected.")
-                playsound("btd/Yes.mp3")
+                os.startfile("btd/Yes.mp3")
                 # Plot and save preprocessed image
                 plt.imshow(img_preprocessed[0])
                 plt.title("Preprocessed Image")
