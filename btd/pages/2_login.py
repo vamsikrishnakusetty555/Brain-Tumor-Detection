@@ -20,10 +20,7 @@ def css():
     </style>
     """, unsafe_allow_html=True)
 
-def get_base64_encoded_audio(filepath):
-    with open(filepath, "rb") as audio_file:
-        encoded_audio = base64.b64encode(audio_file.read()).decode("utf-8")
-    return f"data:audio/mp3;base64,{encoded_audio}"
+
     
 def expanders():
     q = """◼ How long a brain tumor patient can live?/◼ What is the last stage of brain tumor?/◼ Can brain tumor be cured?/◼ Are brain tumors genetic?
@@ -122,8 +119,9 @@ def show_content():
 
             if pred < 95:
                 st.warning( "Tumor is detected.")
-                st.audio(get_base64_encoded_audio("btd/Yes.mp3"), format="audio/mp3", start_time=0)
-                # Plot and save preprocessed image
+                audio_file_path = 'btd/Yes.mp3'
+                audio_html = f'<audio src="{audio_file_path}" controls></audio>'
+                st.markdown(audio_html, unsafe_allow_html=True)               
                 plt.imshow(img_preprocessed[0])
                 plt.title("Preprocessed Image")
                 plt.savefig(os.path.join("temp", "preprocessed_image.jpg"))
@@ -136,7 +134,9 @@ def show_content():
                     st.image(os.path.join("temp", "preprocessed_image.jpg"), caption="Preprocessed Image")
             else:
                 st.success("No Tumor is detected.")
-                st.audio(get_base64_encoded_audio("btd/No.mp3"), format="audio/mp3", start_time=0)
+                audio_file_path = 'btd/No.mp3'
+                audio_html = f'<audio src="{audio_file_path}" controls></audio>'
+                st.markdown(audio_html, unsafe_allow_html=True)    
                 u, p = st.columns([2, 2])
                 with u:
                     st.write("#")
