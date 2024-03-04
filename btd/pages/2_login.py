@@ -1,5 +1,5 @@
 import streamlit as st
-#import pyttsx3
+import pyttsx3
 import pymysql
 import base64
 from gtts import gTTS
@@ -12,9 +12,9 @@ connection = pymysql.connect(
     database="sql6688113"
 )
 def speak(text):
-    tts = gTTS(text=text, lang='en')
-    tts.save("output.mp3")
-    os.system("mpg321 output.mp3")
+    engine = pyttsx3.init()
+    engine.say(text)
+    engine.runAndWait()
 
 
 def css():
