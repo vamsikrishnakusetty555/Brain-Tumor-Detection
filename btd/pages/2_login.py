@@ -117,18 +117,7 @@ def show_content():
 
             if pred < 95:
                 st.warning( "Tumor is detected.")
-                with open("btd/Yes.mp3", "rb") as f:
-                    data = f.read()
-                    b64 = base64.b64encode(data).decode()
-                    md = f"""
-                        <audio controls autoplay="true">
-                        <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
-                        </audio>
-                        """
-                    st.markdown(
-                        md,
-                        unsafe_allow_html=True,
-                    )
+                st.audio("btd/Yes.mp3", format="audio/mp3", start_time=0)
                 # Plot and save preprocessed image
                 plt.imshow(img_preprocessed[0])
                 plt.title("Preprocessed Image")
@@ -142,18 +131,7 @@ def show_content():
                     st.image(os.path.join("temp", "preprocessed_image.jpg"), caption="Preprocessed Image")
             else:
                 st.success("No Tumor is detected.")
-                with open("btd/No.mp3", "rb") as f:
-                    data = f.read()
-                    b64 = base64.b64encode(data).decode()
-                    md = f"""
-                        <audio controls autoplay="true">
-                        <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
-                        </audio>
-                        """
-                    st.markdown(
-                        md,
-                        unsafe_allow_html=True,
-                    )
+                st.audio("btd/No.mp3", format="audio/mp3", start_time=0)
                 u, p = st.columns([2, 2])
                 with u:
                     st.write("#")
