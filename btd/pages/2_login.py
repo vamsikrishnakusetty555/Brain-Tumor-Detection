@@ -119,8 +119,7 @@ def show_content():
 
             if pred < 95:
                 st.warning( "Tumor is detected.")
-                audio_file_path = 'btd/Yes.mp3'
-                audio_html = f'<audio src="{audio_file_path}" controls></audio>'
+                audio_html = f'<audio src="btd/Yes.mp3" controls></audio>'
                 st.markdown(audio_html, unsafe_allow_html=True)               
                 plt.imshow(img_preprocessed[0])
                 plt.title("Preprocessed Image")
