@@ -41,6 +41,13 @@ with dataset:
         unsafe_allow_html=True)
     dataset_url = "https://drive.google.com/uc?id=1wKu-SlTEh93cDGy0MiBGwxWuchi7015o&export=download"
     st.markdown(f"##### **🔗Download the dataset [here]({dataset_url}).**")
+    ppt="https://docs.google.com/presentation/d/1J8vIlqoMImumkFGGBqBH_bx2lLr6Fyxy/edit?usp=sharing&ouid=104382650969956229193&rtpof=true&sd=true"
+    test_images="https://drive.google.com/drive/folders/1aRwEdXnURQgQGZMsbdzIum_VFvyHztfb?usp=sharing"
+    st.markdown(f"##### **🔗Download the dataset [here]({ppt}).**")
+    st.markdown(f"##### **🔗Download the dataset [here]({test_images}).**")
+
+
+    
     st.caption(":orange[**Know More !!**]")
     q = """⏩Origin and Sources/⏩Acknowledgments"""
     a = """The dataset amalgamates images sourced from the renowned academic institution, **the University of California, Irvine (UCI)**, renowned for its comprehensive repositories of machine learning datasets. Additionally, images were sourced from **Kaggle**, a prominent platform hosting datasets and fostering collaborative data science projects. The collaborative effort ensures a rich and varied collection suitable for addressing a spectrum of research questions and applications./
