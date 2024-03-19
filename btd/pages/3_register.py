@@ -6,9 +6,9 @@ import pymysql
 
 connection = pymysql.connect(
     host="sql6.freesqldatabase.com",
-    user="sql6690767",
-    password="HLW1BXqGQa",
-    database="sql6690767"
+    user="sql6692686",
+    password="XeYmMNVucI",
+    database="sql6692686"
 )
 
 
