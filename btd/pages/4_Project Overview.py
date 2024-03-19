@@ -43,8 +43,8 @@ with dataset:
     st.markdown(f"##### **🔗Download the dataset [here]({dataset_url}).**")
     ppt="https://docs.google.com/presentation/d/1J8vIlqoMImumkFGGBqBH_bx2lLr6Fyxy/edit?usp=sharing&ouid=104382650969956229193&rtpof=true&sd=true"
     test_images="https://drive.google.com/drive/folders/1aRwEdXnURQgQGZMsbdzIum_VFvyHztfb?usp=sharing"
-    st.markdown(f"##### **🔗Download the dataset [here]({ppt}).**")
-    st.markdown(f"##### **🔗Download the dataset [here]({test_images}).**")
+    st.markdown(f"##### **🔗Ppt [here]({ppt}).**")
+    st.markdown(f"##### **🔗Test Images [here]({test_images}).**")
 
 
     
