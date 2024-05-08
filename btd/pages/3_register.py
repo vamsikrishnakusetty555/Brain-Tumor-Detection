@@ -45,24 +45,31 @@ def app1():
 def show_registration_page():
     st.markdown("## Registration")
 
-    # Registration form
     user_id_input = st.text_input("Email", key="user_id_input", value="", help="Enter your email address")
     name_input = st.text_input("Username", key="name_input", value="", help="Enter your name")
     password_input = st.text_input("Password", key="password_input", value="", type="password", help="Enter your password")
     confirm_password_input = st.text_input("Confirm Password", key="confirm_password_input", value="", type="password", help="Confirm your password")
 
-    # Register button
     if st.button("Register"):
         # Validate form data
         if not (user_id_input and name_input and password_input and confirm_password_input):
             st.warning("Please fill in all fields.")
-        elif not re.match(r"^\S+@\S+\.\S+$", user_id_input):
-            st.warning("Please enter a valid email address.")
+        elif not re.match(r"^\S+@(gmail\.com|yahoo\.com|outlook\.com)$", user_id_input):
+            st.warning("Please enter a valid email address ending with @gmail.com, @yahoo.com, or @outlook.com.")
+        elif len(password_input) < 8:
+            st.warning("Password must be at least 8 characters long.")
+        elif not re.search(r"[A-Z]", password_input):
+            st.warning("Password must contain at least one uppercase letter.")
+        elif not re.search(r"[a-z]", password_input):
+            st.warning("Password must contain at least one lowercase letter.")
+        elif not re.search(r"\d", password_input):
+            st.warning("Password must contain at least one digit.")
+        elif not re.search(r"[ !@#$%^&*()_+{}\[\]:;<>,.?/~\\-]", password_input):
+            st.warning("Password must contain at least one special character.")
         elif password_input != confirm_password_input:
             st.warning("Passwords do not match.")
         else:
-            # Store form data in session state or proceed with registration logic
-            db(user_id_input,name_input,password_input)
+            db(user_id_input, name_input, password_input)
             st.success("Registration Successful!")
             time.sleep(1)
             st.success("Go to Login Page!")
