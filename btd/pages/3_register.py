@@ -29,7 +29,7 @@ def css():
 
 def app1():
     css()
-    st.title(":orange[Brain Tumor] Detection Portal")
+    st.title(":orange[Brain Tumor] Detection using CNN")
     st.sidebar.empty()
     c1, c2 = st.columns([1.5, 2], gap="small")
 
