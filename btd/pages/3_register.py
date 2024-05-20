@@ -5,10 +5,10 @@ import Home
 import pymysql
 
 connection = pymysql.connect(
-    host="sql6.freesqldatabase.com",
-    user="sql6704913",
-    password="rQqhFUCE1K",
-    database="sql6704913"
+    host="sql7.freesqldatabase.com",
+    user="sql7707656",
+    password="1WaWWuhyfl",
+    database="sql7707656"
 )
 
 def db(email,username,password):
