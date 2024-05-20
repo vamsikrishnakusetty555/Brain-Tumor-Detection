@@ -100,56 +100,61 @@ def show_content():
     image = st.file_uploader("Click here to upload")
     if not os.path.exists("temp"):
         os.makedirs("temp")
-
+    photo_names=[]
+    key_words=["Brain","brain","cancer","Cancer","Not","not","tumor","healthy","Not Cancer","not cancer","mri","scan"]
+    flag=0
     if image is not None:
-
-            with open(os.path.join("temp", image.name), "wb") as f:
-                f.write(image.getbuffer())
-            model=load_model("btd/model/bestmodel.h5")
-            img_path = os.path.join("temp", image.name)
-            img = load_img(img_path, target_size=(224, 224))
-            img_array = img_to_array(img)
-            img_batch = np.expand_dims(img_array, axis=0)
-            img_preprocessed = preprocess_input(img_batch)
-
-            # Predict using the model
-            pred = model.predict(img_preprocessed)
-            pred = pred * 100
-
-            if pred < 95:
-                st.warning( "Tumor is detected.")
-                plt.imshow(img_preprocessed[0])
-                plt.title("Preprocessed Image")
-                plt.savefig(os.path.join("temp", "preprocessed_image.jpg"))
-                plt.close()
-                # Display preprocessed image
-                u, p = st.columns([2, 2])
-                with u:
-                    st.image(img, caption="Uploaded Image")
-                with p:
-                    st.image(os.path.join("temp", "preprocessed_image.jpg"), caption="Preprocessed Image")
+            photo_names.extend(image.name.split())
+            for i in key_words:
+                if i in photo_names:
+                    flag=1
+                    break
+            if flag==0:
+                st.warning("Invalid Image!!")
+                st.warning("Please upload Brain MRI imges only!")
             else:
-                st.success("No Tumor is detected.")
-                u, p = st.columns([2, 2])
-                with u:
-                    st.write("#")
-                    st.image(img, caption="Uploaded Image")
-                with p:
-                    st.markdown("##  Great news! Your scan is clear.")
-                    st.caption("🧠Brainy Facts")
-
-                    # List of brain quotes
-                    brain_facts= [
-                        "**Your brain isn't fully formed until age 25.** Brain development begins from the back of the brain and works its way to the front. Therefore, your frontal lobes, which control planning and reasoning, are the last to strengthen and structure connections.",
-                        "**It’s a myth that you only use 10 percent of your brain.** You actually use all of it. (Yes, even when you are sleeping.) Neurologists confirm that your brain is always active.",
-                        "**The brain itself cannot feel pain.** Although pain is processed in the brain, the organ itself cannot feel pain. This is why brain surgeries can occur while a patient is awake, without discomfort. "
-                    ]
-                    quote_placeholder = st.empty()
-                    for quote in brain_facts:
-                        # Update the quote
-                        quote_placeholder.write(quote)
-                        # Add a small delay to simulate loading
-                        time.sleep(6)
+                with open(os.path.join("temp", image.name), "wb") as f:
+                    f.write(image.getbuffer())
+                model=load_model("btd/model/bestmodel.h5")
+                img_path = os.path.join("temp", image.name)
+                img = load_img(img_path, target_size=(224, 224))
+                img_array = img_to_array(img)
+                img_batch = np.expand_dims(img_array, axis=0)
+                img_preprocessed = preprocess_input(img_batch)
+    
+                pred = model.predict(img_preprocessed)
+                pred = pred * 100
+    
+                if pred < 95:
+                    st.warning( "Tumor is detected.")
+                    plt.imshow(img_preprocessed[0])
+                    plt.title("Preprocessed Image")
+                    plt.savefig(os.path.join("temp", "preprocessed_image.jpg"))
+                    plt.close()
+                    u, p = st.columns([2, 2])
+                    with u:
+                        st.image(img, caption="Uploaded Image")
+                    with p:
+                        st.image(os.path.join("temp", "preprocessed_image.jpg"), caption="Preprocessed Image")
+                else:
+                    st.success("No Tumor is detected.")
+                    u, p = st.columns([2, 2])
+                    with u:
+                        st.write("#")
+                        st.image(img, caption="Uploaded Image")
+                    with p:
+                        st.markdown("##  Great news! Your scan is clear.")
+                        st.caption("🧠Brainy Facts")
+    
+                        brain_facts= [
+                            "**Your brain isn't fully formed until age 25.** Brain development begins from the back of the brain and works its way to the front. Therefore, your frontal lobes, which control planning and reasoning, are the last to strengthen and structure connections.",
+                            "**It’s a myth that you only use 10 percent of your brain.** You actually use all of it. (Yes, even when you are sleeping.) Neurologists confirm that your brain is always active.",
+                            "**The brain itself cannot feel pain.** Although pain is processed in the brain, the organ itself cannot feel pain. This is why brain surgeries can occur while a patient is awake, without discomfort. "
+                        ]
+                        quote_placeholder = st.empty()
+                        for quote in brain_facts:
+                            quote_placeholder.write(quote)
+                            time.sleep(6)
 if __name__ == "__main__":
 
     if "logged_in" not in st.session_state:
