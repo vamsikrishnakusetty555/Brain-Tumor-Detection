@@ -51,7 +51,6 @@ def show_registration_page():
     confirm_password_input = st.text_input("Confirm Password", key="confirm_password_input", value="", type="password", help="Confirm your password")
 
     if st.button("Register"):
-        # Validate form data
         if not (user_id_input and name_input and password_input and confirm_password_input):
             st.warning("Please fill in all fields.")
         elif not re.match(r"^\S+@(gmail\.com|yahoo\.com|outlook\.com)$", user_id_input):
