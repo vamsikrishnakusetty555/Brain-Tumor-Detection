@@ -1,7 +1,7 @@
 import streamlit as st
 import Home
 
-st.title(":orange[Brain Tumor] Detection Portal using CNN")
+st.title(":orange[Brain Tumor] Detection using CNN")
 st.markdown('''
 <style>
 .text{
