@@ -33,7 +33,7 @@ def expanders():
 def app():
     css()
     st.title(":orange[Brain Tumor] Detection using CNN")
-    st.caption("using Convolutional Neural Network)
+    st.caption("using Convolutional Neural Network")
     c1, c2 = st.columns([2.5, 2], gap="small")
 
     with c1:
