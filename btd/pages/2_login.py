@@ -4,7 +4,7 @@ import base64
 import os
 
 connection = pymysql.connect(
-    host="sql7.freesqldatabase.com",
+    host="sql12.freesqldatabase.com",
     user="sql12708566",
     password="bwQh8CzCRw",
     database="sql12708566"
