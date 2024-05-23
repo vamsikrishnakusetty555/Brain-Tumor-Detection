@@ -6,8 +6,8 @@ import os
 connection = pymysql.connect(
     host="sql7.freesqldatabase.com",
     user="sql12708566",
-    password="1WaWWuhyfl",
-    database="bwQh8CzCRw"
+    password="bwQh8CzCRw",
+    database="sql12708566"
 )
 
 def css():
