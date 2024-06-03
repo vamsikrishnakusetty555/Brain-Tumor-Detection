@@ -4,10 +4,10 @@ import base64
 import os
 
 connection = pymysql.connect(
-    host="sql12.freesqldatabase.com",
-    user="sql12708566",
-    password="bwQh8CzCRw",
-    database="sql12708566"
+    host="sql8.freesqldatabase.com",
+    user="sql8711505",
+    password="D7xjhY94mk",
+    database="sql8711505"
 )
 
 def css():
